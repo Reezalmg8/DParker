@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Subscription</title>
+    <!-- Link to your stylesheet -->
+    <link rel="stylesheet" href="css/yellow.css">
+    <link rel="stylesheet" href="css/form.css"> <!-- Include your custom CSS -->
+</head>
+
+<body class="confirm-subscription-body">
+    <header>
+        <!-- Add header code if needed -->
+    </header>
+
+    <main class="container">
+        <h1 class="form-title">Confirm Your Subscription</h1>
+
+        <section class="subscription-summary">
+            <h2 class="summary-title">Your Selected Plan</h2>
+            <div class="plan-details">
+                <!-- Example content, replace with actual plan details -->
+                <h3 class="plan-name">Agency Plan</h3>
+                <p class="plan-price">RM12 per month</p>
+                <p class="plan-description">
+                    Includes:
+                <ul class="plan-description2">
+                    <li>2-15 users</li>
+                    <li>50 websites</li>
+                    <li>Access to premium templates</li>
+                    <li>Priority support</li>
+                </ul>
+                </p>
+            </div>
+        </section>
+
+        <section class="payment-details">
+            <h2 class="payment-title">Enter Payment Details</h2>
+            <form action="your-payment-processing-endpoint" method="POST">
+                <div class="form-group">
+                    <label for="card-name">Name on Card</label>
+                    <input type="text" id="card-name" name="card-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card-number" required>
+                </div>
+                <div class="form-group">
+                    <label for="expiry-date">Expiry Date</label>
+                    <input type="text" id="expiry-date" name="expiry-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" required>
+                </div>
+<button type="button" class="btn-submit" onclick="location.href='qr-generation.html';">Complete Purchase</button>
+            </form>
+        </section>
+
+        <section class="back-link">
+            <p><a href="pay-plan.html">Back to Pricing Plans</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Add footer code if needed -->
+    </footer>
+</body>
+
+</html>

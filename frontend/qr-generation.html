@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generation</title>
+    <!-- Link to your stylesheet -->
+    <link rel="stylesheet" href="css/yellow.css">
+    <link rel="stylesheet" href="css/form.css"> <!-- Include your custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .qr-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ffd700;
+            /* Yellow background */
+            color: black;
+            /* Black text */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background-color: #f7c600;
+            /* Darker yellow for hover */
+        }
+
+        .btn-print {
+            background-color: #ffd700;
+            /* Yellow background */
+        }
+
+        .btn-print:hover {
+            background-color: #f7c600;
+            /* Darker yellow for hover */
+        }
+
+        .btn-save {
+            background-color: #ffd700;
+            /* Yellow background */
+        }
+
+        .btn-save:hover {
+            background-color: #f7c600;
+            /* Darker yellow for hover */
+        }
+
+        .btn-back {
+            background-color: #ffd700;
+            /* Yellow background */
+        }
+
+        .btn-back:hover {
+            background-color: #f7c600;
+            /* Darker yellow for hover */
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body class="qr-generation-body">
+    <header>
+        <!-- Add header code if needed -->
+    </header>
+
+    <main class="container">
+        <h1 class="form-title">Your QR Code</h1>
+
+        <section class="qr-container">
+            <h2 class="qr-title">Generated QR Code</h2>
+            <div class="qr-code">
+                <!-- Example QR code image -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=example" alt="QR Code"
+                    id="qr-image">
+            </div>
+            <a class="btn btn-print" onclick="printQRCode()">Print QR Code</a>
+            <a class="btn btn-save" onclick="saveAsPDF()">Save as PDF</a>
+        </section>
+
+        <section class="back-link">
+            <a class="btn btn-back" href="index.html">Back to Main Menu</a>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Add footer code if needed -->
+    </footer>
+
+    <script>
+        function printQRCode() {
+            const printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write('<html><head><title>Print QR Code</title>');
+            printWindow.document.write('<style>img { max-width: 100%; height: auto; }</style>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(document.getElementById('qr-image').outerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+        }
+
+        function saveAsPDF() {
+            const qrCodeElement = document.querySelector('.qr-container');
+            html2pdf().from(qrCodeElement).save('QRCode.pdf');
+        }
+    </script>
+</body>
+
+</html>

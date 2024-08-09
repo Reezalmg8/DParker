@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/yellow.css">
+    <link rel="stylesheet" href="css/form.css"> <!-- Include the common CSS -->
+</head>
+
+<body class="bg-dark">
+    
+    <div class="container">
+        <h1 class="form-title">Login</h1>
+        <form class="login-form" action="http://localhost:3000/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+<button type="button" class="btn-submit" onclick="location.href='pay-plan.html';">Login</button>
+        </form>
+        <p class="form-link">Don't have an account? <a href="register.html">Sign Up</a></p>
+    </div>
+</body>
+
+</html>

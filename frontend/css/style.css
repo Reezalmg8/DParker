@@ -1,0 +1,87 @@
+/* style.css */
+
+/* Base styles */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Registration container */
+.register-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.register-title {
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 28px;
+    text-align: center;
+}
+
+/* Form group */
+.register-form-group {
+    margin-bottom: 15px;
+}
+
+.register-form-group label {
+    color: #000;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.register-form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.register-form-group input:focus {
+    border-color: #ffcc00;
+    /* Yellow color */
+    box-shadow: 0 0 0 0.2rem rgba(255, 204, 0, 0.25);
+}
+
+/* Submit button */
+.register-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffcc00;
+    /* Yellow color */
+    border: none;
+    color: #000;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.register-submit:hover {
+    background-color: #e6b800;
+    /* Darker yellow */
+}
+
+/* Link to login page */
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #ffcc00;
+    /* Yellow color */
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    color: #e6b800;
+    /* Darker yellow */
+}
