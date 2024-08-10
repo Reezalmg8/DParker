@@ -62,23 +62,38 @@ app.post('/login', (req, res) => {
     });
 });
 
-// Add a subscription
-app.post('/subscribe', authMiddleware, (req, res) => {
-    const { user_id, plan_id } = req.body;
-    const query = 'INSERT INTO user_subscriptions (user_id, plan_id, subscription_date) VALUES (?, ?, NOW())';
-    db.query(query, [req.userId, plan_id], (err, result) => {
-        if (err) throw err;
-        res.send({ message: 'Subscription successful!' });
-    });
-});
+
 
 // Record a payment
 app.post('/payment', authMiddleware, (req, res) => {
-    const { user_id, amount } = req.body;
-    const query = 'INSERT INTO payment_details (user_id, amount, payment_date) VALUES (?, ?, NOW())';
-    db.query(query, [req.userId, amount], (err, result) => {
+    const { amount, status, method } = req.body;
+
+    // Insert payment details into the Payment table
+    const query = 'INSERT INTO Payment (userId, amount, paymentDate, status, method) VALUES (?, ?, NOW(), ?, ?)';
+    
+    db.query(query, [req.userId, amount, status, method], (err, result) => {
         if (err) throw err;
         res.send({ message: 'Payment recorded successfully!' });
+    });
+});
+
+// Add a subscription
+app.post('/subscribe', authMiddleware, (req, res) => {
+    const { plan_id } = req.body;
+    const userId = req.userId;
+    
+    const subscribeQuery = 'INSERT INTO user_subscriptions (user_id, plan_id, subscription_date) VALUES (?, ?, NOW())';
+    const updateStatusQuery = 'UPDATE users SET subscription_status = ? WHERE id = ?';
+    
+    db.query(subscribeQuery, [userId, plan_id], (err, result) => {
+        if (err) return res.status(500).send({ message: 'Error in subscribing the user.' });
+
+        // After successful subscription, update the user's subscription status
+        db.query(updateStatusQuery, ['subscribed', userId], (err, result) => {
+            if (err) return res.status(500).send({ message: 'Error in updating subscription status.' });
+            
+            res.send({ message: 'Subscription successful and status updated!' });
+        });
     });
 });
 
