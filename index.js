@@ -7,6 +7,8 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('./middleware/authMiddleware'); // Import JWT middleware
+const QRCode = require('qrcode');
+const twilio = require('twilio');
 
 const app = express();
 app.use(bodyParser.json());
@@ -96,7 +98,46 @@ app.post('/subscribe', authMiddleware, (req, res) => {
         });
     });
 });
+app.get('/generate-qr', (req, res) => {
+    const data = 'https://example.com'; // Replace with your desired URL or data
 
+    QRCode.toDataURL(data, (err, url) => {
+        if (err) throw err;
+
+        // The 'url' is the base64 encoded image data of the QR code
+        res.send(`<img src="${url}" alt="QR Code" />`);
+    });
+});// Twilio credentials from environment variables
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = new twilio(accountSid, authToken);
+
+// Endpoint to send SMS/WhatsApp
+app.post('/send-message', authMiddleware, (req, res) => {
+    const { to, message, via } = req.body; // 'to' is the recipient number, 'message' is the text, 'via' is 'sms' or 'whatsapp'
+
+    let sendMethod;
+
+    if (via === 'sms') {
+        sendMethod = client.messages.create({
+            body: message,
+            from: process.env.TWILIO_PHONE_NUMBER, // Your Twilio number
+            to: to
+        });
+    } else if (via === 'whatsapp') {
+        sendMethod = client.messages.create({
+            body: message,
+            from: 'whatsapp:' + process.env.TWILIO_WHATSAPP_NUMBER, // Your Twilio WhatsApp number
+            to: 'whatsapp:' + to
+        });
+    }
+
+    sendMethod.then((message) => {
+        res.send({ message: 'Message sent successfully!', sid: message.sid });
+    }).catch((error) => {
+        res.status(500).send({ error: error.message });
+    });
+});
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
