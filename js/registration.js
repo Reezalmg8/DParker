@@ -1,6 +1,6 @@
 // registration.js
 document.querySelector('.register-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
@@ -14,8 +14,15 @@ document.querySelector('.register-form').addEventListener('submit', function(eve
     })
     .then(response => response.json())
     .then(result => {
-        alert(result.message);
-        // Redirect or update UI based on the response
+        if (result.message === 'User registered successfully!') {
+            alert(result.message);
+            location.href = 'login.html'; // Redirect to login page
+        } else {
+            alert('Registration failed: ' + result.message);
+        }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Registration failed. Please try again.');
+    });
 });

@@ -64,8 +64,6 @@ app.post('/login', (req, res) => {
     });
 });
 
-
-
 // Record a payment
 app.post('/payment', authMiddleware, (req, res) => {
     const { amount, status, method } = req.body;
@@ -98,6 +96,8 @@ app.post('/subscribe', authMiddleware, (req, res) => {
         });
     });
 });
+
+// Generate QR code
 app.get('/generate-qr', (req, res) => {
     const data = 'https://example.com'; // Replace with your desired URL or data
 
@@ -107,7 +107,9 @@ app.get('/generate-qr', (req, res) => {
         // The 'url' is the base64 encoded image data of the QR code
         res.send(`<img src="${url}" alt="QR Code" />`);
     });
-});// Twilio credentials from environment variables
+});
+
+// Twilio credentials from environment variables
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = new twilio(accountSid, authToken);
@@ -138,6 +140,7 @@ app.post('/send-message', authMiddleware, (req, res) => {
         res.status(500).send({ error: error.message });
     });
 });
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
