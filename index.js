@@ -12,7 +12,9 @@ const twilio = require('twilio');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    origin: 'https://d-parker.vercel.app', // Your Vercel frontend URL
+}));
 
 // MySQL database connection
 const db = mysql.createConnection({
