@@ -5,7 +5,7 @@ document.querySelector('.register-form').addEventListener('submit', function(eve
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
 
-    fetch('https://d-parker.vercel.app/register', {
+fetch('https://d-parker.vercel.app/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
