@@ -14,6 +14,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors({
     origin: 'https://d-parker.vercel.app', // Your Vercel frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type']
 }));
 
 // MySQL database connection
