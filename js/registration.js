@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 document.querySelector('.register-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
 
