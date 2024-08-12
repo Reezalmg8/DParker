@@ -13,7 +13,7 @@ const twilio = require('twilio');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'http://d-parker.vercel.app', // Your Vercel frontend URL
+    origin: 'https://d-parker.vercel.app', // Your Vercel frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type']
 }));

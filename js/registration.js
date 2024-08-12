@@ -5,7 +5,7 @@ document.querySelector('.register-form').addEventListener('submit', function(eve
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
 
-fetch('http://52.77.246.223:3002/register', {
+fetch('https://52.77.246.223:3002/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
